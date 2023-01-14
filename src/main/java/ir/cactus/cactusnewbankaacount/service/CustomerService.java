@@ -26,4 +26,15 @@ public class CustomerService {
             throw  new RecordeNotFoundException("no customer find ");
         }
     }
+
+    public List<CustomersEntity>getCustomerEntityById(int customer_id)throws RecordeNotFoundException{
+        List<CustomersEntity>customers=repository.getCustomersEntitiesByCustomerId(customer_id);
+        if (customers.size()>0){
+            return customers;
+        }
+        else{
+            throw  new RecordeNotFoundException("no customer by this id found ");
+        }
+
+    }
 }
