@@ -12,6 +12,8 @@ public interface AccountRepository extends JpaRepository<BankAccountEntity,Integ
 
    @Query("from BankAccountEntity where accountCustomerId=?1")
     public List<BankAccountEntity>getBankAccountEntitiesByAccountCustomerId(int accountCustomerId);
+   @Query("from BankAccountEntity where accountNumber=?1")
+    public List<BankAccountEntity>getBankAccountEntitiesByAccountNumber(String AccountNumber);
 
 
 

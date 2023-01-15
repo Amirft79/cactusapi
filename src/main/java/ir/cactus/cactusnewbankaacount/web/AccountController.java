@@ -21,10 +21,12 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
+    private List<BankAccountEntity>accounts;
+
 
     @GetMapping("/FindAllAccounts")
     public ResponseEntity<List<BankAccountEntity>>getAllAccounts()throws RecordeNotFoundException {
-        List<BankAccountEntity>accounts=accountService.getAllAccounts();
+        accounts=accountService.getAllAccounts();
         if (accounts.size()>0)
         return new ResponseEntity<>(accounts,new HttpHeaders(), HttpStatus.OK);
         else throw new RecordeNotFoundException("account with this id not found");
@@ -35,9 +37,19 @@ public class AccountController {
     @GetMapping("/FindAccountByAccountCustomerId/{AccountCustomerId}")
     public ResponseEntity<List<BankAccountEntity>>getAccountByAccountCustomerId(@PathVariable("AccountCustomerId") int accountCustomerId)
     throws RecordeNotFoundException{
-        List<BankAccountEntity>accounts=accountService.getAccountByAccountCustomerId(accountCustomerId);
+      accounts=accountService.getAccountByAccountCustomerId(accountCustomerId);
         if(accounts.size()>0) return new ResponseEntity<>(accounts,new HttpHeaders(),HttpStatus.OK);
         else throw new RecordeNotFoundException("no account found from this id ");
+    }
+
+    @GetMapping("/FindAccountsByAccountNumber/{AccountNumber}")
+    public ResponseEntity<List<BankAccountEntity>>getAccountsByAccountNumber(@PathVariable("AccountNumber")String AccountNumber)throws RecordeNotFoundException{
+        accounts=accountService.getAccountByAccountNumber(AccountNumber);
+        if (accounts.size()>0){
+            return new ResponseEntity<>(accounts,new HttpHeaders(),HttpStatus.OK);
+        }else{
+            throw new RecordeNotFoundException("this account not found by account number ");
+        }
     }
 
 

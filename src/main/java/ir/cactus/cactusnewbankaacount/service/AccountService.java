@@ -35,5 +35,15 @@ public class AccountService {
         else throw new RecordeNotFoundException("account not found with this id ");
     }
 
+    public List<BankAccountEntity>getAccountByAccountNumber(String AccountNumber)throws RecordeNotFoundException{
+        List<BankAccountEntity>accounts=accountRepository.getBankAccountEntitiesByAccountNumber(AccountNumber);
+        if (accounts.size()>0){
+            return accounts;
+        }
+        else{
+            throw new RecordeNotFoundException("account by this accountNumber NotFound");
+        }
+    }
+
 
 }
